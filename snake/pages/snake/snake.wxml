@@ -1,0 +1,41 @@
+
+<!--snake.wxml-->
+<view class="control" bindtouchstart="tapStart" bindtouchmove="tapMove" bindtouchend="tapEnd">
+  <view class="score">
+    <view class="title">滑稽蛇</view>
+    <view class="scoredetail">
+      <view class="scoredesc">成功滑稽</view>
+      <view class="scorenumber">{{score}}次</view>
+    </view>
+    <view class="scoredetail">
+      <view class="scoredesc">历史最高</view>
+      <view class="scorenumber">{{maxscore}}次</view>
+    </view>
+  </view>
+  <view class="ground">
+    <view wx:for="{{ground}}" class="rows" wx:for-item="field">
+      <view wx:for="{{field}}" class="block block_{{item}}">
+      </view>
+    </view>
+  </view>
+  <modal class="modal" hidden="{{modalHidden}}" no-cancel bindconfirm="modalChange">
+    <view wx:if="{{score==0}}">
+      <textarea auto-height />是不是一步都走不了啊，为什么呢？
+      <textarea auto-height />你以为我会告诉你吗
+      <textarea auto-height />图样图森破，自己想吧
+    </view>
+    <view wx:if="{{score>0&&score<20}}"> 你也太不滑稽了... 继续努力吧少年</view>
+    <view wx:if="{{20<score&&score<50}}"> 你的滑稽之路刚刚开始</view>
+    <view wx:if="{{50<score&&score<100}}"> 你是个滑稽高手了，经常混贴吧吧</view>
+    <view wx:if="{{score>100}}"> 传说中的滑稽大师就是你吧</view>
+  </modal>
+  <view>提示：{{tip}}</view>
+  <button type="default" bindtap="showModal">完美通关的攻略在这里哦！</button>
+  <view>
+    <modal title="提示" hidden="{{modalHidden2}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindaconfirm" bindcancel="modalBindcancel">
+      <textarea auto-height />这是滑稽蛇 它看起来与普通的贪食蛇一样
+      <textarea auto-height />划动屏幕开始游戏
+      <textarea auto-height />但却透露出一丝诡异的气息
+      <textarea auto-height />不然怎么滑稽呢
+    </modal>
+  </view>
